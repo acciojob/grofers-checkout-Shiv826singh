@@ -4,28 +4,27 @@ document.body.appendChild(getSumBtn);
 
 const getSum = () => {
 
-  // Get all price cells
-  const prices = document.querySelectorAll(".price");
+  const prices = document.querySelectorAll(".prices");
 
   let total = 0;
 
-  // Sum all values
-  prices.forEach(p => {
-    total += Number(p.textContent);
+  prices.forEach(price => {
+    total += parseInt(price.textContent) || 0;
   });
+
+  // Remove old total row if exists
+  const old = document.getElementById("ans");
+  if (old) old.remove();
 
   // Create new row
   const tr = document.createElement("tr");
-
-  // Create single cell
   const td = document.createElement("td");
 
-  td.colSpan = 2; // span across both columns
+  td.id = "ans";
+  td.colSpan = 2;
   td.textContent = total;
 
   tr.appendChild(td);
-
-  // Append row to table
   document.querySelector("table").appendChild(tr);
 };
 
